@@ -49,15 +49,18 @@
         @click="btnSubmit"
         class="btn btn-primary"
       >Submit</button>
+      {{data}}
     </div>
   </div>
 </template>
 
 <script>
-import { insertCustomer } from "../imports/methods/customerMethods";
+import { insertFile } from "../imports/methods/fileMethods";
+import json from "../doc/customers.json";
 export default {
   data() {
     return {
+      data: json,
       form: {
         name: "",
         age: "",
@@ -66,17 +69,20 @@ export default {
       }
     };
   },
+
   methods: {
     btnSubmit() {
-      insertCustomer.call(this.form, (error, result) => {
-        if (result) {
-          console.log(result);
-        } else console.log(error);
-      });
+      // insertFile.call((error, result) => {
+      //   if (result) {
+      //     this.form = JSON.parse(result);
+      //     console.log(typeof JSON.parse(result), result);
+      //   } else console.log(error);
+      // });
+      WritableStream("../doc/filex.txt", "Spoon");
     }
   }
 };
 </script>
 
 <style>
-</style>
+</style>  
