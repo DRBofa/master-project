@@ -12,7 +12,8 @@
     "fs-extra": "^8.1.0",
     "meteor-node-stubs": "^0.4.1",
     "simpl-schema": "^1.5.5",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "write-file-atomic": "^3.0.0"
   },
   "meteor": {
     "mainModule": {

@@ -49,6 +49,10 @@
         @click="btnSubmit"
         class="btn btn-primary"
       >Submit</button>
+      <button
+        @click="findDoc"
+        class="btn btn-primary"
+      >Find</button>
       {{data}}
     </div>
   </div>
@@ -62,15 +66,22 @@ export default {
     return {
       data: json,
       form: {
-        name: "",
-        age: "",
-        gender: "",
-        email: ""
+        name: "a",
+        age: "b",
+        gender: "c",
+        email: "d"
       }
     };
   },
-
+  mounted() {},
   methods: {
+    findDoc() {
+      Meteor.call("findDoc", (err, result) => {
+        if (result) {
+          console.log(result);
+        }
+      });
+    },
     btnSubmit() {
       // insertFile.call((error, result) => {
       //   if (result) {
@@ -78,7 +89,11 @@ export default {
       //     console.log(typeof JSON.parse(result), result);
       //   } else console.log(error);
       // });
-      WritableStream("../doc/filex.txt", "Spoon");
+      Meteor.call("insertDoc", this.form, (err, result) => {
+        if (result) {
+          console.log(result);
+        }
+      });
     }
   }
 };
