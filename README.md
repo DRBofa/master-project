@@ -70,3 +70,5 @@ npm install --save pouchdb-browser
 ```
 
 ## Usage
+
+- [CRUD](imports/methods/localData.js)
