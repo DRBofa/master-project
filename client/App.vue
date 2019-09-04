@@ -5,6 +5,7 @@
     </h1>
     <br>
     <hr>
+    <!-- form -->
     <div>
       <div class="form-group">
         <label>Name</label>
@@ -49,12 +50,58 @@
         @click="btnSubmit"
         class="btn btn-primary"
       >Submit</button>
+      <button
+        @click="btnGetUser"
+        class="btn btn-primary"
+      >Get User</button>
+      <button
+        @click="btnDestroy"
+        class="btn btn-outline-danger"
+      >Destroy</button>
+
     </div>
+    <!-- End Form -->
+    <!-- Table -->
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="user in users"
+            :key="user.id"
+          >
+            <td>{{user.doc.name}}</td>
+            <td>{{user.doc.age}}</td>
+            <td>{{user.doc.gender}}</td>
+            <td>{{user.doc.email}}</td>
+            <td>
+              <button
+                @click="btnDelete(user.doc)"
+                class="btn btn-danger"
+              >Delete</button>
+              <button
+                @click="btnEdit(user.doc)"
+                class="btn btn-primary"
+              >Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end Table -->
   </div>
 </template>
 
 <script>
-import { insertCustomer } from "../imports/methods/customerMethods";
+import { User } from "../imports/methods/localData";
 export default {
   data() {
     return {
@@ -63,16 +110,48 @@ export default {
         age: "",
         gender: "",
         email: ""
-      }
+      },
+      users: []
     };
   },
+  mounted() {
+    this.btnGetUser();
+  },
   methods: {
+    async btnDestroy() {
+      let success = await User.destroy();
+      if (success) {
+        this.users = [];
+      }
+    },
+    clearForm() {
+      this.form = {
+        name: "",
+        age: "",
+        gender: "",
+        email: ""
+      };
+    },
     btnSubmit() {
-      insertCustomer.call(this.form, (error, result) => {
-        if (result) {
-          console.log(result);
-        } else console.log(error);
-      });
+      if (this.form._id) {
+        User.update(this.form);
+        console.log("updated");
+      } else {
+        User.insert(this.form);
+      }
+      this.btnGetUser();
+      this.clearForm();
+    },
+    async btnGetUser() {
+      let users = await User.find();
+      this.users = users;
+    },
+    btnDelete(user) {
+      User.delete(user);
+      this.btnGetUser();
+    },
+    btnEdit(user) {
+      this.form = user;
     }
   }
 };

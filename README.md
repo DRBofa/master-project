@@ -3,6 +3,7 @@
 - [Run](#To-run-this-Project)
 - [Meteor+Vue](#1-Meteor-with-Vue)
 - [Validated Methods](#2-Validated-Methods)
+- [pouchDB](#Local-Database)
 
 # meteor-validartedMethod-calling-method
 
@@ -55,3 +56,17 @@ meteor add aldeed:collection2
 ```
 
 #### https://github.com/aldeed/meteor-collection2
+
+# [pouchDB](#Local-Database)(Local-Database)
+
+## Local Database (https://pouchdb.com/download.html)
+
+```bash
+sudo npm install --save pouchdb
+```
+
+```bash
+npm install --save pouchdb-browser
+```
+
+## Usage
