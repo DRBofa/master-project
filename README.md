@@ -4,6 +4,7 @@
 - [Meteor+Vue](#1-Meteor-with-Vue)
 - [Validated Methods](#2-Validated-Methods)
 - [pouchDB](#Local-Database)
+- [Build Mobile](#Mobile)
 
 # meteor-validartedMethod-calling-method
 
@@ -72,3 +73,28 @@ npm install --save pouchdb-browser
 ## Usage
 
 - [CRUD](imports/methods/localData.js)
+
+# Mobile
+
+- [Documents](https://www.meteor.com/tutorials/blaze/running-on-mobile)
+- ## Add android platform
+
+```bash
+meteor add-platform android
+```
+
+- ## Run Android Debug
+
+```bash
+meteor run android --verbose
+```
+
+- ## Build as file .apk
+
+```bash
+meteor build ~/Desktop/CustomValidate/  --server=https://example.com:443
+```
+
+##### `~/Desktop/CustomValidate/` គឺជា folder ដែលយើងចង់ build ចេញ
+
+##### `https://example.com:443` គឺជា server ដែលយើងប្រើជាមួយ App
